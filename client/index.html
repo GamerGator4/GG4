@@ -372,7 +372,7 @@
         <!--<div>
             <input id="address2" type="textbox">
             <input type="button" value="Drop Pin" onclick="codeAddress()" style = "margin-bottom:20px;">
-        </div>-->
+        </div>
         <h2>Chosen Location</h2>
         <form method="post">
             <input type="text" id="lat" readonly="yes"><br>
@@ -469,6 +469,67 @@
         //Create the map object.
         map = new google.maps.Map(document.getElementById('map'), options);
 
+	//*Demo for location descriptions
+        var marstonCoord = { lat: 29.64800550050426, lng: -82.34393348764826 };
+        var marstonMarker = new google.maps.Marker({
+            position: marstonCoord,
+            map: map,
+            title: 'Marston Library'
+        });
+
+        var marstonContentString = '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h1 id="firstHeading" class="firstHeading">Marston Library</h1>' +
+            '<div id="bodyContent">' +
+            '<p><b>Marston</b>, is the gaming central of the gator nation!</p> ' +
+            '<p>444 Newell Dr, Gainesville, FL 32611</p>' +
+            '<p>Its right next to that big yellow thing near Turlington</p>' +
+            '</div>' +
+            '</div>';
+
+        var marstonInfoWindow = new google.maps.InfoWindow({
+            content: marstonContentString
+        });
+
+        
+        marstonMarker.addListener('click', function () {
+            marstonInfoWindow.open(map, marstonMarker);
+        });
+
+        //*Demo for location descriptions
+        var dungeonCoord = { lat: 29.648323964973187, lng: -82.34447633568726 };
+        var dungeonMarker = new google.maps.Marker({
+            position: dungeonCoord,
+            map: map,
+            title: 'The Dungeon'
+        });
+
+        var dungeonContentString = '<div id="content">' +
+            '<div id="siteNotice">' +
+            '</div>' +
+            '<h1 id="firstHeading" class="firstHeading">The Dungeon</h1>' +
+            '<div id="bodyContent">' +
+            '<p><b>The dungeon</b>, is a computer lab deep in the bowels of the UF Computer Science Building</p> ' +
+            '<p>432 Newell Dr, Gainesville, FL 32611</p>' +
+            '<p>Take the stairs down, if you see the soda machines youre real close</p>' +
+            '</div>' +
+            '</div>';
+
+        var dungeonInfoWindow = new google.maps.InfoWindow({
+            content: dungeonContentString
+        });
+
+
+        dungeonMarker.addListener('click', function () {
+            dungeonInfoWindow.open(map, dungeonMarker);
+        });
+
+        //End of demo
+
+
+	//click listener commented out for now (been using it to get exact coordinates for the locations)
+        /*
         //Listen for any clicks on the map.
         google.maps.event.addListener(map, 'click', function(event) {
             //Get the location that the user clicked.
@@ -492,6 +553,7 @@
             //Get the marker's location.
             markerLocation();
         });
+	*/
     }
 
     //This function will get the marker's current location and then add the lat/long
